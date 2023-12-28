@@ -173,7 +173,7 @@ const UserModal = () => {
                   key={field.key}
                   label={field.label}
                   type={field.key === "email" ? "email" : "text"}
-                  value={defaultToEmptyStr(userForm[field.key])}
+                  value={userForm[field.key] || ""}
                   error={!!formErrors[field.key]}
                   helperText={formErrors[field.key]}
                   onChange={(e: TextFieldChangeEvent) =>

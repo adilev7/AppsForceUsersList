@@ -1,13 +1,22 @@
-import { Container } from "@mui/material";
+import { Container, AppBar, Toolbar, Typography } from "@mui/material";
 import UsersList from "./components/users/UsersList";
 import UserModal from "./components/users/UserFormModal";
+import { APP_NAME } from "./constants";
 
 const App = () => {
   return (
-    <Container>
-      <UsersList />
-      <UserModal />
-    </Container>
+    <>
+      <AppBar position="fixed" className="AppBar">
+        <Toolbar>
+          <Typography variant="h4">{APP_NAME}</Typography>
+        </Toolbar>
+      </AppBar>
+      <Toolbar />
+      <Container>
+        <UsersList />
+        <UserModal />
+      </Container>
+    </>
   );
 };
 

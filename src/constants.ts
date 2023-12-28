@@ -1,5 +1,7 @@
 import { User, UserFormFields } from "./types";
 
+export const APP_NAME = 'Users Library'
+
 export const USER_NAME_MIN_LENGTH = 3;
 
 export const USER_EMPTY_STATE: User = {
