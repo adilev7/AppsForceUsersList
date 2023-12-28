@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import UsersList from "./components/users/UsersList";
 import UserModal from "./components/users/UserFormModal";
 
