@@ -1,0 +1,7 @@
+@import "../../styles/variables.scss";
+.AppBar {
+  background: $app-gradient;
+  .text-wrap {
+    justify-content: center;
+  }
+}

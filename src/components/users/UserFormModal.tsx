@@ -154,7 +154,7 @@ const UserModal = () => {
           <Stack gap={3}>
             {userFormFields.map((field) =>
               field.key === "title" ? (
-                <FormControl fullWidth>
+                <FormControl fullWidth key={field.key}>
                   <InputLabel id="demo-simple-select-label">Age</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
@@ -164,7 +164,9 @@ const UserModal = () => {
                     onChange={titleChangeHandler}
                   >
                     {USER_TITLE_OPTIONS.map((option) => (
-                      <MenuItem value={option.value}>{option.label}</MenuItem>
+                      <MenuItem value={option.value} key={option.value}>
+                        {option.label}
+                      </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
