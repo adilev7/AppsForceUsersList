@@ -30,11 +30,7 @@ import {
   UserFormFields,
 } from "../../types";
 
-import {
-  defaultToEmptyStr,
-  getEmptyFieldError,
-  getNameError,
-} from "../../utils";
+import { getEmptyFieldError, getNameError } from "../../utils";
 
 const UserModal = () => {
   const dispatch = useAppDispatch();
