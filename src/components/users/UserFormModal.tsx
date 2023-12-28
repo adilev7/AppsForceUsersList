@@ -184,6 +184,7 @@ const UserModal = () => {
             )}
           </Stack>
           <DialogActions>
+            <Button onClick={() => dispatch(closeModal())}>Cancel</Button>
             <Button type="submit" disabled={!formHasChanged}>
               {formActionTxt}
             </Button>

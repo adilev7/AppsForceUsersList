@@ -5,7 +5,6 @@ import UserModal from "./components/users/UserFormModal";
 const App = () => {
   return (
     <Container>
-      <Typography variant="h1">Hello World!</Typography>
       <UsersList />
       <UserModal />
     </Container>
