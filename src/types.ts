@@ -1,12 +1,12 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 export type NullableString = string | null | undefined;
 
 export type TextFieldChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
-export interface User {
+export interface User extends Record<string, NullableString> {
   id: NullableString;
-  title: NullableString;
+  title: string;
   firstName: NullableString;
   lastName: NullableString;
   fullName: NullableString;
@@ -17,6 +17,8 @@ export interface User {
   street: NullableString;
   address: NullableString;
 }
+
+// type UserProperty = keyof User;
 
 export interface FetchedAPIUser {
   login: {
@@ -45,3 +47,9 @@ export type UserFormFields = [
   { label: "City"; key: "city" },
   { label: "Street"; key: "street" }
 ];
+
+export type DynamicComponentProps = {
+  component: React.ComponentType<React.PropsWithChildren>;
+  children?: ReactNode;
+};
+export type DynamicComponentType = React.FC<DynamicComponentProps>;

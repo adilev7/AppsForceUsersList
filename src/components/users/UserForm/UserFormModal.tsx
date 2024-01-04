@@ -12,27 +12,27 @@ import {
   TextField,
 } from "@mui/material";
 
-import BaseModal from "../base/BaseModal";
-import { addUser, updateUser } from "../../store/usersSlice";
-import { closeModal } from "../../store/modalSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import BaseModal from "../../base/BaseModal";
+
+import { addUser, updateUser } from "@/store/usersSlice";
+import { closeModal } from "@/store/modalSlice";
+
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import {
   USER_EMPTY_STATE,
   USER_FORM_FIELDS,
   USER_NAME_MIN_LENGTH,
   USER_TITLE_OPTIONS,
-} from "../../constants";
-
+} from "@/constants";
 import {
   NullableString,
   TextFieldChangeEvent,
   User,
-  UserFormFields,
-} from "../../types";
+  UserFormField,
+} from "@/types";
+import { getEmptyFieldError, getNameError } from "@/utils";
 
-import { getEmptyFieldError, getNameError } from "../../utils";
-
-const UserModal = () => {
+const UserFormModal = () => {
   const dispatch = useAppDispatch();
 
   const user: User = useAppSelector((state) => {
@@ -44,9 +44,9 @@ const UserModal = () => {
   });
 
   const [userForm, setUserForm] = useState<User>(USER_EMPTY_STATE);
-  const [userTitle, setUserTitle] = useState<string>(
-    USER_TITLE_OPTIONS[0].value
-  );
+  // const [userTitle, setUserTitle] = useState<string>(
+  //   USER_TITLE_OPTIONS[0].value
+  // );
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [formHasChanged, setFormHasChanged] = useState(false);
 
@@ -55,8 +55,6 @@ const UserModal = () => {
   }, [user]);
 
   const isNewUser = !user.id;
-
-  const userFormFields: UserFormFields = USER_FORM_FIELDS;
 
   const formActionTxt = `${isNewUser ? "Create New" : "Update"} User`;
 
@@ -113,11 +111,39 @@ const UserModal = () => {
     );
   };
 
-  const titleChangeHandler = (e: SelectChangeEvent<string>) => {
-    setUserTitle(e.target.value);
-  };
+  const UserTitleSelect: React.FC = () => (
+    <FormControl fullWidth>
+      <InputLabel variant="outlined">Title</InputLabel>
+      <Select
+        value={userForm.title}
+        label="Title"
+        onChange={(e: SelectChangeEvent) => inputChangeHandler(e, "title")}
+      >
+        {USER_TITLE_OPTIONS.map((option) => (
+          <MenuItem value={option.value} key={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
 
-  const inputChangeHandler = (e: TextFieldChangeEvent, key: string) => {
+  const UserTextField: React.FC<{ field: UserFormField }> = ({ field }) => (
+    <TextField
+      key={field.key}
+      label={field.label}
+      type={field.key === "email" ? "email" : "text"}
+      value={userForm[field.key] || ""}
+      error={!!formErrors[field.key]}
+      helperText={formErrors[field.key]}
+      onChange={(e: TextFieldChangeEvent) => inputChangeHandler(e, field.key)}
+    />
+  );
+
+  const inputChangeHandler = (
+    e: TextFieldChangeEvent | SelectChangeEvent,
+    key: string
+  ) => {
     setFormHasChanged(true);
     setUserForm((state) => ({ ...state, [key]: e.target.value }));
     setFormErrors((prevErrors) => ({ ...prevErrors, [key]: "" }));
@@ -137,7 +163,7 @@ const UserModal = () => {
   };
 
   return (
-    <div className="UserModal">
+    <div className="UserFormModal">
       <BaseModal title={formActionTxt}>
         <Box
           component="form"
@@ -148,24 +174,9 @@ const UserModal = () => {
           sx={{ padding: 5 }}
         >
           <Stack gap={3}>
-            {userFormFields.map((field) =>
+            {USER_FORM_FIELDS.map((field) =>
               field.key === "title" ? (
-                <FormControl fullWidth key={field.key}>
-                  <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={userTitle}
-                    label="Age"
-                    onChange={titleChangeHandler}
-                  >
-                    {USER_TITLE_OPTIONS.map((option) => (
-                      <MenuItem value={option.value} key={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
+                <UserTitleSelect />
               ) : (
                 <TextField
                   key={field.key}
@@ -193,4 +204,4 @@ const UserModal = () => {
   );
 };
 
-export default UserModal;
+export default UserFormModal;

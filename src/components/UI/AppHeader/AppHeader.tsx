@@ -1,5 +1,5 @@
 import { AppBar, Toolbar, Typography } from "@mui/material";
-import { APP_NAME } from "../../constants";
+import { APP_NAME } from "@/constants";
 import classes from "./AppHeader.module.scss";
 
 const AppHeader = () => {

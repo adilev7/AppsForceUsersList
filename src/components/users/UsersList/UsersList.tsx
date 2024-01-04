@@ -1,9 +1,10 @@
 import { List } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useEffect } from "react";
-import { fetchUsers } from "../../store/usersSlice";
-import UsersListItem from "./UsersListItem";
+import { fetchUsers } from "@/store/usersSlice";
+import UsersListItem from "../UsersListItem/UsersListItem";
 import UsersListSkeleton from "./UsersListSkeleton";
+import styles from "./UsersList.module.scss";
 
 const UsersList = () => {
   const { users, isLoading, error } = useAppSelector((state) => state.users);
@@ -16,7 +17,7 @@ const UsersList = () => {
   return error ? (
     <h1 className="UsersListError">{error}</h1>
   ) : (
-    <List className="UsersList" sx={{ width: "100%" }}>
+    <List className={styles.UsersList} sx={{ width: "100%" }}>
       {isLoading ? (
         <UsersListSkeleton />
       ) : (

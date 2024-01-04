@@ -1,17 +1,26 @@
 import { Container } from "@mui/material";
-import UsersList from "./components/users/UsersList";
-import UserModal from "./components/users/UserFormModal";
-import AppHeader from "./components/UI/AppHeader";
-
+import UsersList from "./components/users/UsersList/UsersList";
+import UserFormModal from "./components/users/UserForm/UserFormModal";
+import AppHeader from "./components/UI/AppHeader/AppHeader";
+import CircularPlusButton from "./components/UI/Buttons/CircularPlusButton";
+import { useAppDispatch } from "./hooks";
+import { openModal } from "./store/modalSlice";
 const App = () => {
+  const dispatch = useAppDispatch();
+
   return (
-    <>
+    <div id="App">
       <AppHeader />
-      <Container>
+      <Container maxWidth="sm">
         <UsersList />
-        <UserModal />
+
+        <CircularPlusButton
+          className="AddUserButton"
+          onClick={() => dispatch(openModal())}
+        />
       </Container>
-    </>
+      <UserFormModal />
+    </div>
   );
 };
 

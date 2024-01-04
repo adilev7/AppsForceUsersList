@@ -1,0 +1,46 @@
+.UsersListItem {
+  .user-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 540px;
+    height: 150px;
+    max-width: 100%;
+    min-width: 50%;
+    .avatar {
+      width: 25%;
+      height: 25%;
+      max-width: 80px;
+      max-height: 80px;
+    }
+    .card-meta {
+      width: 65%;
+    }
+    .actions {
+      margin-left: auto;
+      width: 10%;
+      :global {
+        .BaseButton {
+          border-radius: 50%;
+          width: 35px;
+          height: 35px;
+          min-width: 35px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 728px) {
+  .UsersListItem .user-card {
+    .card-meta {
+      .meta-title {
+        font-size: 1.1rem;
+      }
+      .meta-text * {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

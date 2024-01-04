@@ -1,4 +1,4 @@
-@import "./styles/variables.scss";
+@import "@/styles/variables.scss";
 @import "@fontsource/roboto/300.css";
 @import "@fontsource/roboto/400.css";
 @import "@fontsource/roboto/500.css";
@@ -6,4 +6,16 @@
 
 body {
   background-color: $light;
+}
+
+#App {
+  margin-bottom: calc($addUserButtonSize + $addUserButtonSpacing + 1rem);
+  .AddUserButton {
+    position: fixed;
+    border-radius: 50%;
+    bottom: $addUserButtonSpacing;
+    right: $addUserButtonSpacing;
+    height: $addUserButtonSize;
+    width: $addUserButtonSize;
+  }
 }
