@@ -31,6 +31,7 @@ import {
   UserFormField,
 } from "@/types";
 import { getEmptyFieldError, getNameError } from "@/utils";
+import { resetUserForm } from "@/store/userFormSlice";
 
 const UserFormModal = () => {
   const dispatch = useAppDispatch();
@@ -159,6 +160,7 @@ const UserFormModal = () => {
         dispatch(updateUser(userForm));
       }
       dispatch(closeModal());
+      dispatch(resetUserForm());
     }
   };
 
@@ -176,14 +178,21 @@ const UserFormModal = () => {
           <Stack gap={3}>
             {USER_FORM_FIELDS.map((field) =>
               field.key === "title" ? (
-                <UserTitleSelect />
+                <UserTitleSelect key={field.key} />
               ) : (
-                <UserTextField field={field} />
+                <UserTextField field={field} key={field.key} />
               )
             )}
           </Stack>
           <DialogActions>
-            <Button onClick={() => dispatch(closeModal())}>Cancel</Button>
+            <Button
+              onClick={() => {
+                dispatch(closeModal());
+                dispatch(resetUserForm());
+              }}
+            >
+              Cancel
+            </Button>
             <Button type="submit" disabled={!formHasChanged}>
               {formActionTxt}
             </Button>

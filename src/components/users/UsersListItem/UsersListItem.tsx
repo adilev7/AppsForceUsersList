@@ -16,6 +16,7 @@ import SecondaryButton from "../../UI/Buttons/SecondaryButton";
 import PrimaryButton from "../../UI/Buttons/PrimaryButton";
 import { Delete, Edit } from "@mui/icons-material";
 import styles from "./UsersListItem.module.scss";
+import { deleteUser } from "@/store/usersSlice";
 
 const UsersListItem = (props: { user: User }) => {
   const dispatch = useAppDispatch();
@@ -50,7 +51,11 @@ const UsersListItem = (props: { user: User }) => {
             <PrimaryButton size="small" onClick={editClickHandler}>
               <Edit fontSize="small" />
             </PrimaryButton>
-            <SecondaryButton size="small" variant="contained">
+            <SecondaryButton
+              size="small"
+              variant="contained"
+              onClick={() => dispatch(deleteUser(user.id!))}
+            >
               <Delete fontSize="small" />
             </SecondaryButton>
           </Stack>

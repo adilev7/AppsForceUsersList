@@ -43,7 +43,7 @@ export const usersSlice = createSlice({
       );
     },
     deleteUser: (state, action: PayloadAction<string>) => {
-      state.users = state.users.filter((user) => user.id === action.payload);
+      state.users = state.users.filter((user) => user.id !== action.payload);
     },
   },
   extraReducers: (builder) => {
