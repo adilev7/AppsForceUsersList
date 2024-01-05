@@ -178,17 +178,7 @@ const UserFormModal = () => {
               field.key === "title" ? (
                 <UserTitleSelect />
               ) : (
-                <TextField
-                  key={field.key}
-                  label={field.label}
-                  type={field.key === "email" ? "email" : "text"}
-                  value={userForm[field.key] || ""}
-                  error={!!formErrors[field.key]}
-                  helperText={formErrors[field.key]}
-                  onChange={(e: TextFieldChangeEvent) =>
-                    inputChangeHandler(e, field.key)
-                  }
-                />
+                <UserTextField field={field} />
               )
             )}
           </Stack>

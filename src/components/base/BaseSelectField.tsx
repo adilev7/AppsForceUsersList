@@ -7,8 +7,8 @@ import {
 import React from "react";
 
 type BaseSelectFieldProps = React.PropsWithChildren & {
-  label: string;
-  value: string;
+  label?: string;
+  value?: string;
   onChange: (e: SelectChangeEvent) => void;
 };
 
